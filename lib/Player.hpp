@@ -11,6 +11,7 @@ private:
     int defense;
 
 public:
+    Player();
     void attack(int);
     void pickUp();
     void drop();
