@@ -7,6 +7,7 @@ private:
     int attck_power;
     int defense;
 public:
+    Enemy();
     void attack();
     void dodge();
 };
