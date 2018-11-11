@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    cout << "Welcome to the Greatest Adventure!" << endl;
+    cout << "Decorator is an Item" << endl;
 
     return 0;
 }
