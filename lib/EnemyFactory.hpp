@@ -1,8 +1,11 @@
 #pragma once
 #include "../include/EnemyInterface.hpp"
+#include "Minion.hpp"
+#include "Boss.hpp"
+
 
 class EnemyFactory
 {
 public:
-    EnemyFactory *make_chooser(std::string type);
+    EnemyInterface *make_chooser(std::string enemy_type);
 };
