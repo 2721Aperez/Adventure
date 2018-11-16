@@ -6,7 +6,7 @@ class Minion: public EnemyInterface
 {
 private:
     int HP;
-    int attck_power;
+    int attack_power;
     int defense;
 public:
     Minion();
