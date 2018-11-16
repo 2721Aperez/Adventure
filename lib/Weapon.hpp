@@ -1,6 +1,6 @@
-#include "Item.hpp"
-
-class Weapon: public Item
+#pragma once 
+#include <iostream>
+class Weapon
 {
 private:
     int weight;

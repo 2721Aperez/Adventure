@@ -1,9 +1,7 @@
 #pragma once 
+#include <iostream>
 
-#include "Item.hpp"
-
-
-class Potion: public Item
+class Potion
 {
 
 };
