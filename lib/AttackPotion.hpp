@@ -3,5 +3,6 @@
 
 class AttackPotion: public Potion
 {
-
+private:
+    int attack_bonus;
 };

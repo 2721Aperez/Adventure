@@ -5,4 +5,8 @@ class Potion
 {
 private:
     int weight;
+    int bonus;
+
+public:
+    void consume();
 };
