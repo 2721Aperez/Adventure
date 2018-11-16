@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    cout << "Decorator is an Item" << endl;
+    cout << "Weapon and Potion is an Decorator" << endl;
 
     return 0;
 }
