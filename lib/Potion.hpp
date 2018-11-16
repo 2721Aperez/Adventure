@@ -3,5 +3,6 @@
 
 class Potion
 {
-
+private:
+    int weight;
 };
