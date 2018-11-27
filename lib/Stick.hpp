@@ -7,8 +7,9 @@ class Stick:public Weapon
 private:
     int weight;
     int damage;
-    int durability;
+    //int durability;
 public:
-    void attack();
-
+    Stick();
+    void setAttackDamage()override;
+    int getAttackDamage()const; 
 };

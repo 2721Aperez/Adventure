@@ -4,8 +4,10 @@
 class Sword: public Weapon
 {
 private:
-    int additional_weight;
-    int additional_damage;
+    int weight;
+    int damage;
 public:
-    
+    Sword();
+    void setAttackDamage()override;
+    int getAttackDamage()const;
 };

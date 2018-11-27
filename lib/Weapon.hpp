@@ -3,5 +3,5 @@
 class Weapon
 {
 public:
-    virtual void attack_damage() = 0;
+    virtual void setAttackDamage() = 0;
 };
