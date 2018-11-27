@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Direction.hpp"
-#include "Item.hpp"
+
 
 class Player
 {
@@ -12,7 +12,7 @@ private:
 
 public:
     Player();
-    void attack(int);
+    void attack();
     void pickUp();
     void drop();
     void useItem();//Item type in parameter

@@ -7,7 +7,7 @@ Player::Player()
     defense = 10;
 }
 
-void Player::attack(int damage_val) // Do something
+void Player::attack() // Do something
 {
 
 }
