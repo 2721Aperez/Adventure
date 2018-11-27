@@ -6,7 +6,10 @@ class LeatherArmor:public Armor
 {
 private:
     int defense;
+    int weight;
 public:
-    void setDefense()override;
-    int getDefense()const;
+    LeatherArmor():weight(5){}
+    void setDefense();
+    int getDefense()const override;
+    int getWeight()const;
 };
