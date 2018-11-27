@@ -7,6 +7,6 @@ class LeatherArmor:public Armor
 private:
     int defense;
 public:
-    void setDefense();
+    void setDefense()override;
     int getDefense()const;
 };
