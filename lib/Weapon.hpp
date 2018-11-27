@@ -2,10 +2,6 @@
 #include <iostream>
 class Weapon
 {
-private:
-    int weight;
-    int damage;
 public:
-    Weapon();
-    void attack();
+    virtual void attack_damage() = 0;
 };
