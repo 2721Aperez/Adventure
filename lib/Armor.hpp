@@ -1,7 +1,11 @@
 #pragma once
 
+#include <cstdlib>
 class Armor
 {
+private:
+    int defense;
 public:
-    virtual void setDefense()=0;
+    Armor(): defense(5) {} //base value for armor defense
+    virtual int getDefense()const;
 };
