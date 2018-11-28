@@ -7,7 +7,8 @@ private:
     int weight;
     int damage;
 public:
-    Sword();
-    void setAttackDamage()override;
-    int getAttackDamage()const;
+    Sword(): weight(20){}
+    void setAttackDamage();
+    int getAttackDamage()const override;
+    int getWeight()const;
 };

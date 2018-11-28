@@ -1,8 +1,11 @@
 #include "Sword.hpp"
-#include <cstdlib>
 
-Sword::Sword(){weight = 10;}
 
-void Sword::setAttackDamage() {damage = rand()%50+1;}
+void Sword::setAttackDamage() {damage = rand()%40+10;}
 
-int Sword::getAttackDamage()const{return damage;}
+int Sword::getAttackDamage()const
+{
+    return Weapon::getAttackDamage() + damage;
+}
+
+int Sword::getWeight()const{return weight;}
