@@ -9,7 +9,8 @@ private:
     int damage;
     //int durability;
 public:
-    Stick();
-    void setAttackDamage()override;
-    int getAttackDamage()const; 
+    Stick(): weight(5){}
+    void setAttackDamage();
+    int getAttackDamage()const override;
+    int getWeight()const; 
 };
