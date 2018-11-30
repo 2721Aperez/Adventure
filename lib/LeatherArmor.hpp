@@ -11,5 +11,4 @@ public:
     LeatherArmor():weight(5){}
     void setDefense();
     int getDefense()const override;
-    int getWeight()const;
 };
