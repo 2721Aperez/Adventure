@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include <iostream>
 
 class Potion
@@ -8,5 +8,7 @@ private:
     int bonus;
 
 public:
-    void consume();
+    Potion() : weight (1), bonus (0) {}
+    virtual void consume(Potion *potion) = 0;
+    virtual ~Potion();
 };
