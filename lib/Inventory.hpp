@@ -1,6 +1,7 @@
 #include "Sword.hpp"
 #include "Stick.hpp"
 #include "DivineAxeRhitta.hpp"
+#include "Potion.hpp"
 
 
 class Inventory
@@ -11,7 +12,8 @@ private:
 
 public:
     Inventory(): max_weight(50){}
-    void addItem();
+    void addWeapon(Weapon *weaponType);
+    void addPotion(Potion *potionType);
     void removeItem();
     int checkCapacity();
 };
