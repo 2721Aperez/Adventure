@@ -7,7 +7,7 @@ private:
     int weight;
     int damage;
 public:
-    Divine_Axe():weight(70), damage(100){}
+    Divine_Axe():weight(50), damage(100){}
     // void setAttackDamage();
     int getAttackDamage()const override;
     int getWeight()const;    
