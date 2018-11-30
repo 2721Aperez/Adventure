@@ -1,5 +1,6 @@
 #include "Potion.hpp"
 
+#pragma once
 
 class HealthPotion: public Potion
 {
