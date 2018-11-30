@@ -1,6 +1,5 @@
 #include "Potion.hpp"
-
-#prgama once
+#pragma once
 
 class AttackPotion: public Potion
 {
