@@ -1,12 +1,13 @@
-#pragma once 
+#pragma once
 #include <iostream>
 
 class Potion
 {
 private:
     int weight;
-    int bonus;
 
 public:
-    void consume();
+    Potion() : weight (5) {}
+    virtual void consume(Potion *potion) = 0;
+    virtual ~Potion();
 };
