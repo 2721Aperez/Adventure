@@ -7,27 +7,55 @@ Player::Player()
     defense = 10;
 }
 
-void Player::attack() // Do something
+int Player::getHP() const
 {
-
+    return HP;
 }
 
-void Player::pickUp()//pick up something
+void Player::setHP(int hp)
 {
-
+    HP = hp;
 }
 
-void Player::drop()//Drop Item
+int Player::getAttackPower() const
 {
-
+    return attack_power;
 }
 
-void Player::useItem()//use stuff
+void Player::takeDamage(Enemy *enemy)
 {
-
+    srand(time(0));
+    int dodgeChance = rand() % 10;
+    if(dodgeChance == 3 || dodgeChance == 7)
+    {
+        dodge();
+    }
+    else
+    {
+        int damage = enemy.getAttackPower();
+        damage -= defense;
+        HP -= damage;
+    }
 }
 
-void Player::direction(Direction dir)
+void Player::attack(Enemy *enemy)
 {
-    
+    enemy.takeDamage(attack_power);
+}
+
+void Player::dodge()
+{
+    std::cout << "You dodged the attack!" << endl;
+}
+
+bool Player::isDead()
+{
+    if(HP <= 0)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
 }
