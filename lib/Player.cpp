@@ -27,7 +27,7 @@ void Player::useItem()//use stuff
 
 }
 
-void Player::direction(Direction dir)
+void Player::move(Direction dir)
 {
     
 }

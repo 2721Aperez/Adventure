@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Direction.hpp"
+#include "Inventory.hpp"
 
 
 class Player
@@ -16,5 +17,5 @@ public:
     void pickUp();
     void drop();
     void useItem();//Item type in parameter
-    void direction(Direction);//Direction type in parameter
+    void move(Direction);//Direction type in parameter
 };
