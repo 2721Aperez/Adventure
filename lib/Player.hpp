@@ -1,9 +1,8 @@
 #pragma once
 
 #include <stdlib.h>
-#include <cmath.h>
 #include "Direction.hpp"
-#inlcude "Enemy.hpp"
+#include "../include/Enemy.hpp" 
 
 class Player
 {
