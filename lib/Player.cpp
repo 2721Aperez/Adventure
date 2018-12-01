@@ -48,7 +48,11 @@ void Player::dodge()
     std::cout << "You dodged the attack!" << endl;
 }
 
+<<<<<<< HEAD
 bool Player::isDead()
+=======
+void Player::move(Direction dir)
+>>>>>>> 5f18159f51c71d4f9f51ca6653acf0e9020e78c3
 {
     if(HP <= 0)
     {

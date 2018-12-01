@@ -9,5 +9,3 @@ int LeatherArmor::getDefense()const
 {
     return Armor::getDefense() + defense;
 }
-
-int LeatherArmor::getWeight()const {return weight;}
