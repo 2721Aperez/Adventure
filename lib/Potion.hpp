@@ -9,5 +9,6 @@ private:
 public:
     Potion() : weight (5) {}
     virtual void consume(Potion *potion) = 0;
+    int getWeight()const{return weight;}
     virtual ~Potion();
 };
