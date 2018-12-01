@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../include/EnemyInterface.hpp"
+#include <stdlib.h>
+#include "../include/Enemy.hpp"
 
-class Minion: public EnemyInterface
+class Minion: public Enemy
 {
 private:
     int HP;
@@ -10,7 +11,11 @@ private:
     int defense;
 public:
     Minion();
-    ~Minion();
-    void attack() override;
+    int getHP() const;
+    int getAttackPower() const;
+    void takeDamage(Player *player);
+    void attack(Player *player) override;
     void dodge() override;
+    bool isDead();
+    ~Minion();
 };
