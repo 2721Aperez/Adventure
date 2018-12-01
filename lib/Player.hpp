@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include "Direction.hpp"
-#include "../include/Enemy.hpp" 
+#include "../include/Enemy.hpp"
 
 class Player
 {
@@ -16,6 +16,7 @@ public:
     int getHP() const;
     int getAttackPower() const;
     void setHP(int hp);
+    void attack(Enemy *enemy); 
     void takeDamage(Enemy *enemy);
     void dodge();
     bool isDead();
