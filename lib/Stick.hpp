@@ -12,5 +12,6 @@ public:
     Stick(): weight(5){}
     void setAttackDamage();
     int getAttackDamage()const override;
-    int getWeight()const; 
+    int getWeight()const override; 
+    ~Stick();
 };
