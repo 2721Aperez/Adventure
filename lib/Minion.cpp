@@ -17,7 +17,7 @@ int Minion::getAttackPower() const
 	return attack_power;
 }
 
-void Minion::takeDamage(int damage)
+void Minion::takeDamage(int damage) 
 {
 	bool isDead = false;
 
@@ -34,9 +34,9 @@ void Minion::takeDamage(int damage)
 	}
 }
 
-void Minion::attack(Player player)
+void Minion::attack(Player *player)
 {
-	player.takeDamage(attack_power);
+	player->takeDamage(attack_power);
 }
 
 void Minion::dodge()
