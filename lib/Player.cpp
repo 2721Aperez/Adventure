@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "../include/Enemy.hpp"
 
 Player::Player()
 {
@@ -37,9 +38,9 @@ void Player::takeDamage(int damage)
 	}
 }
 
-void Player::attack(Enemy enemy)
+void Player::attack(Enemy *enemy)
 {
-	enemy.takeDamage(attack_power);
+	enemy->takeDamage(attack_power);
 }
 
 void Player::dodge()
