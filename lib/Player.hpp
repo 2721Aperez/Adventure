@@ -7,18 +7,18 @@
 class Player
 {
 private:
-    int HP;
-    int attack_power;
-    int defense;
+	int HP;
+	int attack_power;
+	int defense;
 
 public:
-    Player();
-    int getHP() const;
-    int getAttackPower() const;
-    void setHP(int hp);
-    void attack(Enemy *enemy); 
-    void takeDamage(Enemy *enemy);
-    void dodge();
-    bool isDead();
-    ~Player();
+	Player();
+	int getHP() const;
+	int getAttackPower() const;
+	void setHP(int hp);
+	void attack(Enemy enemy);
+	void takeDamage(int damage);
+	void dodge();
+	bool isDead();
+	//~Player();
 };

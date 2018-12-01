@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <cmath.h>
 #include "Player.hpp"
 
 class Enemy
