@@ -13,5 +13,5 @@ public:
     void setAttackDamage();
     int getAttackDamage()const override;
     int getWeight()const override; 
-    ~Stick();
+    //~Stick();
 };

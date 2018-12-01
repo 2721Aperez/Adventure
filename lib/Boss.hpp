@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../include/EnemyInterface.hpp"
+#include "../include/Enemy.hpp"
 
 class Boss: public EnemyInterface
 {
