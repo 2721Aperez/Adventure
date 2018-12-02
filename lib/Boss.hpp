@@ -13,5 +13,6 @@ public:
 	void attack(Player player) override;
 	void dodge() override;
 	void takeDamage(int attack_power) override;
+	void isDead();
 	void transform();
 };
