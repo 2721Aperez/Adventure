@@ -4,7 +4,7 @@ void Inventory::addWeapon(Weapon *weaponType)
 {
     int remaining_weight = max_weight - current_weight;
 
-    if (weaponType->getWeight() >= remaining_weight)
+    if (weaponType->getWeight() >= max_weight)
     {
         std::cout << "You don't have enough room for this weapon." << std::endl;
     }
@@ -23,7 +23,7 @@ void Inventory::addPotion(Potion *potionType)
 {
     int remaining_weight = max_weight - current_weight;
 
-    if (potionType->getWeight() >= remaining_weight)
+    if (potionType->getWeight() >= max_weight)
     {
         std::cout << "You don't have enough room for this potion." << std::endl;
     }
@@ -41,7 +41,19 @@ void Inventory::addPotion(Potion *potionType)
 void Inventory::addArmor(Armor *armorType)
 {
     int remaining_weight = max_weight - current_weight;
-    if(armorType->getWeight() >= remaining_weight);
+    if(armorType->getWeight() >= max_weight)
+    {
+        std::cout << "You don't have enough room for this armor." << std::endl;
+    }
+    else if (remaining_weight < armorType->getWeight())
+    {
+        std::cout << "You have no more room for this armor. Drop something you hoarder" << std::endl;
+    }
+    else
+    {
+        armor = armorType;
+        current_weight += armorType->getWeight();
+    }
 }
 
 void Inventory::removePotion(int i)
@@ -60,12 +72,23 @@ void Inventory::removePotion(int i)
 
 void Inventory::removeWeapon()
 {
-    delete weapon;
+    if(weapon == nullptr){
+        //do nothing
+    }
+    else {
+        delete weapon;
+    }
+
 }
 
 void Inventory::removeArmor()
 {
-    delete armor;
+    if(armor == nullptr){
+        //do nothing
+    }
+    else {
+        delete armor;
+    }
 }
 
 int Inventory::checkCapacity()
