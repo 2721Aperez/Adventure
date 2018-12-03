@@ -15,4 +15,5 @@ public:
 	void takeDamage(int attack_power) override;
 	void isDead();
 	void transform();
+	
 };

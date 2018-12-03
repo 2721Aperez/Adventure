@@ -1,4 +1,5 @@
 Boss::Boss()
+
 {
     HP = 100;
     attack_power = 60;
