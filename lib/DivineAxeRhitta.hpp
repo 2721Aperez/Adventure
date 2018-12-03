@@ -11,5 +11,5 @@ public:
     int getAttackDamage()const override;
     int getWeight()const override;  
     void getWeaponType() override;
-    //~Divine_Axe();  
+    ~Divine_Axe(){}  
 };
