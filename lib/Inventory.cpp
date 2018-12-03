@@ -65,5 +65,11 @@ int Inventory::checkCapacity()
 void Inventory::checkInventory()
 {
 	if (weapon == nullptr) { std::cout << "You have no weapons." << std::endl; }
-    if (potion.empty()) { std::cout << "You have no potions." << std::endl; }
+	else
+	{
+		std::cout << "Current Weapon: ";
+		weapon->getWeaponType();
+	}
+	if (potion.empty()) { std::cout << "You have no potions." << std::endl; }
+
 }
