@@ -4,9 +4,11 @@
 #include "AttackPotion.hpp"
 #include "HealthPotion.hpp"
 #include "vector"
+#include "LeatherArmor.hpp"
+#include "MetalArmor.hpp"
+
 
 #pragma once
-
 using std::vector;
 
 class Inventory
@@ -15,13 +17,17 @@ private:
 	int max_weight;
 	int current_weight;
 	Weapon *weapon;
-	vector<Potion*> potion;
+	Armor *armor;
+
 public:
-	Inventory() : max_weight(50), weapon(nullptr), potion{nullptr}, current_weight(0) {}
+	Inventory() : max_weight(50), weapon(nullptr), potion{nullptr}, armor(nullptr), current_weight(0) {}
 	void addWeapon(Weapon *weaponType);
 	void addPotion(Potion *potionType);
+	void addArmor(Armor *armorType);
 	void removePotion(int i);
 	void removeWeapon();
+	void removeArmor();
 	int checkCapacity();
 	void checkInventory();
+	vector<Potion*> potion;
 };
