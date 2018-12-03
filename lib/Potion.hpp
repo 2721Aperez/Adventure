@@ -4,11 +4,13 @@
 class Potion
 {
 private:
-    int weight;
+	int weight;
 
 public:
-    Potion() : weight (5) {}
-    virtual void consume(Potion *potion) = 0;
-    int getWeight()const{return weight;}
-    virtual ~Potion();
+	Potion() : weight(5) {}
+	virtual void consume(Potion *potion) = 0;
+	int getWeight()const { return weight; }
+	virtual void getPotionType() = 0;
+	virtual ~Potion() {}
 };
+
