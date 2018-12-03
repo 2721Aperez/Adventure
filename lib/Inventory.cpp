@@ -70,6 +70,7 @@ void Inventory::checkInventory()
 		std::cout << "Current Weapon: ";
 		weapon->getWeaponType();
 	}
+	
 	if (potion.empty()) { std::cout << "You have no potions." << std::endl; }
 	else
 	{

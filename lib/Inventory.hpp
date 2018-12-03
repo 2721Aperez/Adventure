@@ -17,7 +17,7 @@ private:
 	Weapon *weapon;
 	vector<Potion*> potion;
 public:
-	Inventory() : max_weight(50), weapon(nullptr), potion{nullptr} {}
+	Inventory() : max_weight(50), weapon(nullptr), potion{nullptr}, current_weight(0) {}
 	void addWeapon(Weapon *weaponType);
 	void addPotion(Potion *potionType);
 	void removePotion(int i);
