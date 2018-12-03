@@ -1,4 +1,4 @@
-#include "MetalArmor.h"
+#include "MetalArmor.hpp"
 
 void MetalArmor::setDefense() { defense = rand() % 50 + 1; }
 

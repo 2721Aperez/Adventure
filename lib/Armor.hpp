@@ -6,6 +6,8 @@ class Armor
 private:
     int defense;
 public:
-    Armor(): defense(5) {} //base value for armor defense
-    virtual int getDefense()const{return defense;}
+    Armor() : defense(5) {} //base value for armor defense
+    virtual int getDefense()const { return defense; }
+    virtual int getWeight() const = 0;
+    virtual ~Armor() {}
 };

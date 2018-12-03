@@ -1,4 +1,4 @@
-#include "LeatherArmor.h"
+#include "LeatherArmor.hpp"
 
 void LeatherArmor::setDefense()
 {
