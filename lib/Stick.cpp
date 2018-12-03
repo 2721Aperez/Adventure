@@ -13,3 +13,5 @@ int Stick::getWeight()const
 {
     return weight;
 }
+
+void Stick::getWeaponType(){std::cout<< "Weapon Type: Stick" << std::endl;}

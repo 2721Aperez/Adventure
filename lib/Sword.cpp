@@ -9,3 +9,5 @@ int Sword::getAttackDamage()const
 }
 
 int Sword::getWeight()const{return weight;}
+
+void Sword::getWeaponType(){std::cout<< "Weapon Type: Sword" << std::endl;}

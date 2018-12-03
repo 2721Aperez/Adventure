@@ -11,5 +11,6 @@ public:
     void setAttackDamage();
     int getAttackDamage()const override;
     int getWeight()const override;
+    void getWeaponType() override;
     //~Sword(); 
 };
