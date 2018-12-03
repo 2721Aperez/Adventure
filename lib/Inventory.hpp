@@ -1,7 +1,8 @@
 #include "Sword.hpp"
 #include "Stick.hpp"
 #include "DivineAxeRhitta.hpp"
-#include "Potion.hpp"
+#include "AttackPotion.hpp"
+#include "HealthPotion.hpp"
 #include "vector"
 
 #pragma once
