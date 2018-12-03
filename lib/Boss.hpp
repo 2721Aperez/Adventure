@@ -10,8 +10,8 @@ private:
 	int defense;
 public:
 	Boss();
-	int getHP() const;
-	int getAttackPower() const;
+	int getHP() const override;
+	int getAttackPower() const override;
 	void takeDamage(int damage);
 	void attack(Player *player) override;
 	void dodge() override;
