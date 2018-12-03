@@ -71,5 +71,12 @@ void Inventory::checkInventory()
 		weapon->getWeaponType();
 	}
 	if (potion.empty()) { std::cout << "You have no potions." << std::endl; }
+	else
+	{
+		for (int i=0; i<potion.size(); i++)
+		{
+			potion[i]->getPotionType();
+		}
+	}
 
 }
