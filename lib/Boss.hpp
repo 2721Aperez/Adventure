@@ -9,9 +9,11 @@ private:
 	int defense;
 public:
 	Boss();
-	//~Boss();
+	~Boss();
 	void attack(Player player) override;
 	void dodge() override;
 	void takeDamage(int attack_power) override;
-	//void transform();
+	void isDead();
+	void transform();
+	
 };
