@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../include/Enemy.hpp"
+
 class Boss : public Enemy
 {
 private:
@@ -9,11 +10,12 @@ private:
 	int defense;
 public:
 	Boss();
-	~Boss();
-	void attack(Player player) override;
+	int getHP() const;
+	int getAttackPower() const;
+	void takeDamage(int damage);
+	void attack(Player *player) override;
 	void dodge() override;
-	void takeDamage(int attack_power) override;
-	void isDead();
-	void transform();
-	
+	bool isDead() override;
+	void transform()override;
+	~Boss() {}
 };
