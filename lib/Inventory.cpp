@@ -114,3 +114,18 @@ void Inventory::checkInventory()
     }
 
 }
+
+int Inventory::getWeaponAttack()
+{
+    if(weapon == nullptr){
+        return 0;
+    }
+    else
+    {
+        return weapon->getAttackDamage();
+    }
+}
+
+void Inventory::consume(int index) {
+    potion.erase(potion.begin() + index);
+}

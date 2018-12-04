@@ -1,7 +1,6 @@
 #include "Player.hpp"
 #include "Enemy.hpp"
 #include "Minion.hpp"
-//#include "Direction.h"
 #include "EnemyFactory.hpp"
 #include <string>
 #include <cstdlib>
@@ -10,8 +9,8 @@
 char generateRoom();
 bool generateBossEncounter(Player &Adventurer);
 bool generateMinionEncounter(Player &Adventurer);
-void battle(Player &Adventurer, Enemy &enemy);
-
+void generateLoot(Player &Adventurer);
+bool programFlowWait();
 
 int main() {
     bool startGame = false;
@@ -63,16 +62,36 @@ int main() {
                         std::cout << "You have found a room within the dungeon containing a chest!" << std::endl;
                         std::cout << "A random minion appears and attacks!" << std::endl;
                         if (generateMinionEncounter(*adventurer)) {
-                            //Enters if player dies to minion
+                            //Enters if minion is defeated
+                            std::cout << "For defeating the minion, you are able to loot the chest." << std::endl;
+                            generateLoot(*adventurer);
+                            std::cout << "You exit the room and proceed deeper into the dungeon." <<std::endl;
+                            generatedRoom = generateRoom();
                         }
                         else {
-                            //Enters if minion is defeated
+                            //Enters if player is defeated
+                            std::cout << "You were slain to a minion, you would have had no chance against the boss." << std::endl;
+                            bossEntered = true; //to exit loop
                         }
+                        programFlowWait();
                         break;
                     case 'h': //hallway
                         /*
                          * Generate enemy to fight to go on
                          */
+                        if(generateMinionEncounter(*adventurer)){
+                            //play defeats minion
+                            std::cout << "Congratulations for defeating the enemy! " << std::endl;
+                            std::cout << "With it out of the way, you are able to proceed." << std::endl;
+
+                        }
+                        else {
+                            //player dies
+                            std::cout << "Unfortunately you have perished to a mere minion." <<std::endl;
+                            bossEntered = true; //exits loop
+
+                        }
+                        programFlowWait();
                         break;
                     case 'b'://boss room
                         /*
@@ -88,11 +107,14 @@ int main() {
                             std::cout << "Good luck Adventurer." << std::endl;
                             std::cout << "I hope you have had enough luck to gather some items, else this will be difficult." << std::endl;
                         }
+                        programFlowWait();
                         break;
                     case 'd': //dead end
                         /*
                          * Do nothing, generate new room
                          */
+                        std::cout << "The dungeons of ZugZwang are full of deadends! You turn around and head deeper into the dungeon." << std::endl;
+                        programFlowWait();
                         break;
                     default:
                         break;
@@ -110,6 +132,7 @@ int main() {
             if (adventurer->isDead()) { //check if player is dead
                 std::cout << "You have fought bravely Adventurer, but alas the dungeon of ZugZwang has prevailed!." << std::endl;
                 delete adventurer;
+                programFlowWait();
                 startGame = false;
             }
             else {
@@ -117,9 +140,11 @@ int main() {
                 if (generateBossEncounter(*adventurer)) {
                     std::cout << "Congratulations Adventurer!" << std::endl;
                     std::cout << "You have slain ZugZwang's greatest enemy, the dungeon now belongs to you!" << std::endl;
+                    startGame = false;
                 }
                 else {
                     std::cout << "The guardian of ZugZwang has claimed another victim." << std::endl;
+                    programFlowWait();
                     delete adventurer;
                 }
             }
@@ -147,6 +172,7 @@ char generateRoom() {
         case 0: room = 'd';
             break;
     }
+    //std::cout << "generated: " << room << std::endl;
     return room;
 }
 bool generateMinionEncounter(Player &Adventurer) {
@@ -155,24 +181,91 @@ bool generateMinionEncounter(Player &Adventurer) {
      */
     EnemyFactory enemyType;
     Enemy *minion = enemyType.make_chooser("minion");
-    bool battleEnded = false;
-    while(!battleEnded){
-        //battle(&Adventurer, minion);
+    bool onGoingBattle = true;
+    char potion;
+    int potion_damage;
 
+    while(onGoingBattle){
+        std::cout << "Adventurer HP: " << Adventurer.getHP() << std::endl;
+        std::cout << "Minion HP: " << minion->getHP() << std::endl;
+        if(Adventurer.backpack.potion.empty()){
+            //No potions available
+            potion_damage = 0;
+        }
+        else
+        {
+            std::cout << "You have potions available to use, would you like to use them during this fight?" << std::endl;
+            std::cout << "Enter (A) to use Attack Potion, (H) for Health Potion, (N) for no potion." << std::endl;
+            Adventurer.backpack.checkInventory();
+            std::cin >> potion;
+            if(potion == 'A'){
+                //check for attack potion
+                bool potionFound = false;
+                int potion_index;
+                for(int i = 0; i < Adventurer.backpack.potion.size(); i++){
+                    if(Adventurer.backpack.potion[i]->potionType == "attack"){
+                        potion_index = i;
+                        potionFound = true;
+                    }
+                }
+                if(potionFound){
+                    potion_damage = Adventurer.backpack.potion[potion_index]->getAttack();
+                    Adventurer.backpack.consume(potion_index);
+                }
+                else
+                {
+                    std::cout << "That potion was not found in your inventory." << std::endl;
+                }
+            }
+            else if(potion == 'H'){
+                bool potionFound = false;
+                int potion_index;
+                for(int i = 0; i < Adventurer.backpack.potion.size(); i++){
+                    if(Adventurer.backpack.potion[i]->potionType == "health"){
+                        potion_index = i;
+                        potionFound = true;
+                    }
+                }
+                if(potionFound){
+                    Adventurer.setHP(Adventurer.getHP() + 5);
+                    Adventurer.backpack.consume(potion_index);
+                }
+                else
+                {
+                    std::cout << "That potion was not found in your inventory." << std::endl;
+                }
+            }
+        }
+        minion->takeDamage(Adventurer.getAttackPower() + Adventurer.backpack.getWeaponAttack() + potion_damage);
+        //Check if minion is dead
+        if(minion->isDead()){
+            std::cout << "Congratulations! You have slain the minion!" << std::endl;
+            std::cout << "You have " << Adventurer.getHP() << " HP left after defeating the minion." << std::endl;
+            onGoingBattle = false; //only way to exit loop other than player dying
+        }
+        else
+        {
+            Adventurer.takeDamage(minion->getAttackPower());
+            //check if player died
+            if(Adventurer.isDead()){
+                return false;
+            }
+        }
+        programFlowWait();
     }
     return true;
 }
 void generateLoot(Player &Adventurer) {
     int randItem = rand() % 10;
-    char choice;
+    char take_choice;
     std::cout << "You open the chest and find the following." << std::endl;
     switch(randItem){
         case 0: //Divine Axe
             std::cout << "You have been blessed by the Gods and found the Divine Axe Rhitta!" << std::endl;
             std::cout << "This axe is so heavy and powerful that it can be the only item equipped." << std::endl;
             std::cout << "Would you like to replace your current weapon and all your equipment? (Y) (N)" << std::endl;
-            std::cin >> choice;
-            if(choice == 'Y') {
+            std::cin >> take_choice;
+            if(take_choice == 'Y') {
                 Adventurer.backpack.removeWeapon();
                 Adventurer.backpack.removeArmor();
                 for(int i = 0; i < Adventurer.backpack.potion.size() - 1; i++){
@@ -187,8 +280,8 @@ void generateLoot(Player &Adventurer) {
         case 1: //Sword
             std::cout << "You have found a sword in the chest!" << std::endl;
             std::cout << "Would you like to replace your current weapon? (Y) (N)" << std::endl;
-            std::cin >> choice;
-            if(choice == 'Y'){
+            std::cin >> take_choice;
+            if(take_choice == 'Y'){
                 Adventurer.backpack.removeWeapon();
                 Adventurer.backpack.addWeapon(new Sword);
             }
@@ -198,9 +291,9 @@ void generateLoot(Player &Adventurer) {
             break;
         case 2: //Stick
             std::cout << "You have found a stick in the chest, not the best." << std::endl;
-            std::cout << "Would you like to replace your current weapin? (Y) (N)" << std::endl;
-            std::cin >> choice;
-            if(choice == 'Y'){
+            std::cout << "Would you like to replace your current weapon? (Y) (N)" << std::endl;
+            std::cin >> take_choice;
+            if(take_choice == 'Y'){
                 Adventurer.backpack.removeWeapon();
                 Adventurer.backpack.addWeapon(new Stick);
             }
@@ -211,8 +304,8 @@ void generateLoot(Player &Adventurer) {
         case 3: //Leather Armor
             std::cout << "You open the chest and find some Leather Armor." << std::endl;
             std::cout << "Would you like to take and equip the armor? (Y) (N)" << std::endl;
-            std::cin >> choice;
-            if(choice == 'Y'){
+            std::cin >> take_choice;
+            if(take_choice == 'Y'){
                 Adventurer.backpack.removeArmor();
                 Adventurer.backpack.addArmor(new LeatherArmor);
             }
@@ -220,8 +313,8 @@ void generateLoot(Player &Adventurer) {
         case 4: //Metal Armor
             std::cout << "You open the chest and find some shiny Metal Armor!" << std::endl;
             std::cout << "Would you like to take and equip the armor? (Y) (N)" << std::endl;
-            std::cin >> choice;
-            if(choice == 'Y'){
+            std::cin >> take_choice;
+            if(take_choice == 'Y'){
                 Adventurer.backpack.removeArmor();
                 Adventurer.backpack.addArmor(new MetalArmor);
             }
@@ -229,8 +322,8 @@ void generateLoot(Player &Adventurer) {
         case 5: //Attack Potion
             std::cout << "You open the chest to find a bright red potion used to boost your attack power!" << std::endl;
             std::cout << "Would you like to take the Attack potion? (Y) (N)" << std::endl;
-            std::cin >> choice;
-            if(choice == 'Y'){
+            std::cin >> take_choice;
+            if(take_choice == 'Y'){
                 Adventurer.backpack.addPotion(new AttackPotion);
             }
             else {
@@ -240,7 +333,7 @@ void generateLoot(Player &Adventurer) {
         case 6: //Health Potion
             std::cout << "You open the chest to find a deep green potion used to heal yourself." << std::endl;
             std::cout << "Would you like to take the Health potion? (Y) (N)" << std::endl;
-            if(choice == 'Y'){
+            if(take_choice == 'Y'){
                 Adventurer.backpack.addPotion(new HealthPotion);
             }
             else {
@@ -261,14 +354,86 @@ bool generateBossEncounter(Player &Adventurer) {
     /*
      * Returns true if player defeats boss, false if player dies
      */
+    int potion_damage;
+    char potion_choice;
+    bool currentBattle;
     EnemyFactory enemyType;
     Enemy *boss = enemyType.make_chooser("boss");
+    std::cout << "Welcome to the deepest chamber within ZugZwang" << std::endl;
+    std::cout << "Not many can make it this far, but no one has yet defeated me!" << std::endl;
+    while(currentBattle){
+        if(Adventurer.backpack.potion.empty()){
+            //no potions to use
+            potion_damage = 0;
+        }
+        else {
+            std::cout << "You have potions available for use, would you like use any?" << std::endl;
+            std::cout << "Enter (A) to use Attack Potion, (H) for Health Potion, (N) for no potion." << std::endl;
+            Adventurer.backpack.checkInventory();
+            std::cin >> potion_choice;
+            if(potion_choice == 'A'){
+                //check for attack potion
+                bool potionFound = false;
+                int potion_index;
+                for(int i = 0; i < Adventurer.backpack.potion.size(); i++){
+                    if(Adventurer.backpack.potion[i]->potionType == "attack"){
+                        potion_index = i;
+                        potionFound = true;
+                    }
+                }
+                if(potionFound){
+                    potion_damage = Adventurer.backpack.potion[potion_index]->getAttack();
+                    Adventurer.backpack.consume(potion_index);
+                }
+                else
+                {
+                    std::cout << "That potion was not found in your inventory." << std::endl;
+                }
+            }
+            else if(potion_choice == 'H'){
+                bool potionFound = false;
+                int potion_index;
+                for(int i = 0; i < Adventurer.backpack.potion.size(); i++){
+                    if(Adventurer.backpack.potion[i]->potionType == "health"){
+                        potion_index = i;
+                        potionFound = true;
+                    }
+                }
+                if(potionFound){
+                    Adventurer.setHP(Adventurer.getHP() + 5);
+                    Adventurer.backpack.consume(potion_index);
+                }
+                else
+                {
+                    std::cout << "That potion was not found in your inventory." << std::endl;
+                }
+            }
+            boss->takeDamage(Adventurer.getAttackPower() + Adventurer.backpack.getWeaponAttack() + potion_damage);
+            programFlowWait();
+            if(boss->getHP() <= 50){
+                std::cout << "It has been a long time since anyone has pushed me this far! You shall pay!" << std::endl;
+                boss->transform();
+                std::cout << "You see the boss has transformed to its true form! A tentacle'd beast known at Cthulu!!" << std::endl;
+                std::cout << "In this form, the boss has increased attack power, be careful Adventurer!" << std::endl;
+            }
+            Adventurer.takeDamage(boss->getAttackPower());
+            programFlowWait();
+        }
+        programFlowWait();
+    }
     return true;
 }
-void battle(Player &Adventurer, Enemy &enemy){
-    Adventurer.takeDamage(enemy.getAttackPower());
-    enemy.takeDamage(Adventurer.getAttackPower());
+bool programFlowWait(){
+    /*
+     * Without some sort of wait, things such as battles happen to quickly if user doesn't have potions
+     */
+    int uselessVariable = 0;
+    std::cout << "Please press enter (1) to continue." << std::endl;
+    std::cin >> uselessVariable;
+    return uselessVariable;
+
 }
+
 
 
 
