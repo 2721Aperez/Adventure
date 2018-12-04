@@ -20,14 +20,16 @@ private:
 	Armor *armor;
 
 public:
-	Inventory() : max_weight(50), weapon(nullptr), potion{nullptr}, armor(nullptr), current_weight(0) {}
+	Inventory() : max_weight(50), weapon(nullptr), armor(nullptr), current_weight(0) {}
 	void addWeapon(Weapon *weaponType);
 	void addPotion(Potion *potionType);
 	void addArmor(Armor *armorType);
 	void removePotion(int i);
 	void removeWeapon();
 	void removeArmor();
+	int getWeaponAttack();
 	int checkCapacity();
 	void checkInventory();
 	vector<Potion*> potion;
+	void consume(int index); //removes a potion at a given index
 };
